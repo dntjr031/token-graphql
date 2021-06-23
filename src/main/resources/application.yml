@@ -1,0 +1,15 @@
+graphql:
+  spqr:
+    gui:
+      enabled: true
+
+spring:
+  datasource:
+    username: UFDR
+    password: ufdr_123#
+    url: jdbc:oracle:thin:@192.168.100.14:1521:ufdr
+    driver-class-name: oracle.jdbc.OracleDriver
+  jpa:
+    show-sql: true
+server:
+  port: 9999
