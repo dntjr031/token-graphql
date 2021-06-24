@@ -5,11 +5,22 @@ graphql:
 
 spring:
   datasource:
-    username: UFDR
-    password: ufdr_123#
-    url: jdbc:oracle:thin:@192.168.100.14:1521:ufdr
+    username: JLF_OP
+    password: jlf_op123#
+    url: jdbc:oracle:thin:@192.168.100.11:1521:JLFDB
     driver-class-name: oracle.jdbc.OracleDriver
   jpa:
     show-sql: true
+    hibernate:
+      ddl-auto: none
+    database: oracle
+    properties:
+      hibernate:
+        format_sql: true
+    open-in-view: false
+
+  jwt:
+    secret: TOKEN_SECRET_KEY
+
 server:
   port: 9999
