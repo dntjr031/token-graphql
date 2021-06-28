@@ -11,7 +11,6 @@ import com.lama.graphqlserver.util.ResponseUtil;
 import io.leangen.graphql.annotations.GraphQLMutation;
 import io.leangen.graphql.spqr.spring.annotations.GraphQLApi;
 import lombok.AllArgsConstructor;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 
@@ -23,7 +22,6 @@ public class UserController {
   private final UserService service;
   private final AuthenticationTokenProvider tokenProvider;
 
-  @PreAuthorize("isFullyAuthenticated()")
   @GraphQLMutation(name = "login")
   public CommonResponse<UserResponse> login(String userId, String password) {
     UserView user = service.loadUserByUsername(userId);
