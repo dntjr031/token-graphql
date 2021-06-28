@@ -6,11 +6,14 @@ import com.lama.graphqlserver.user.entity.UserView;
 import com.lama.graphqlserver.common.CommonResponse;
 import com.lama.graphqlserver.user.model.UserResponse;
 import com.lama.graphqlserver.user.service.UserService;
+import com.lama.graphqlserver.util.AuthenticationUtil;
 import com.lama.graphqlserver.util.BeanUtils;
 import com.lama.graphqlserver.util.ResponseUtil;
 import io.leangen.graphql.annotations.GraphQLMutation;
+import io.leangen.graphql.annotations.GraphQLQuery;
 import io.leangen.graphql.spqr.spring.annotations.GraphQLApi;
 import lombok.AllArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 
@@ -32,11 +35,10 @@ public class UserController {
     return ResponseUtil.fail(null, "비밀번호가 일치하지 않습니다.");
   }
 
-//  @PreAuthorize("isAuthenticated()")
-//  @GraphQLQuery(name = "user")
-//  public CommonResponse<String> getUser() {
-//    String id = AuthenticationUtil.getUserDetail().getUserId();
-//    return new CommonResponse<>(id);
-//  }
+  @PreAuthorize("isAuthenticated()")
+  @GraphQLQuery(name = "loginUser")
+  public CommonResponse<UserView> getUser() {
+    return ResponseUtil.success(AuthenticationUtil.getUserDetail());
+  }
 
 }
